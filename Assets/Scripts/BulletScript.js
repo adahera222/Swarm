@@ -17,7 +17,7 @@ function Update () {
 
 function OnTriggerEnter(otherObject : Collider) {
 	if (otherObject.gameObject.tag == "Enemy") {
-		PlayerScript.PlayerScore += 100;
+		GameScript.Score += 100;
 		
 		EnemyScript.Respawn(otherObject.gameObject.transform);
 		

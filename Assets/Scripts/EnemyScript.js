@@ -10,7 +10,7 @@ function Update () {
 	var amtToMove = EnemySpeed * Time.deltaTime;
 	transform.Translate(Vector3.down * amtToMove);
 	if (transform.position.y <= -5.2) {
-		PlayerScript.PlayerScore -= 20;
+		GameScript.Score -= 20;
 		Respawn(transform);
 	}
 }

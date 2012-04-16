@@ -1,10 +1,8 @@
 #pragma strict
 var PlayerSpeed : int;
-var PlayerLives : int;
-var PlayerRespawnDelay : float;
+var PlayerDeathDelay : float;
 var BulletPrefab : Rigidbody;
 var PlayerExplosionPrefab : Transform;
-static var PlayerScore : int;
 
 function Start () {
 
@@ -25,8 +23,8 @@ function Update () {
 }
 
 function OnGUI() {
-	GUI.Label(Rect(10, 10, 200, 50), "Score: " + PlayerScore);
-	GUI.Label(Rect(10, 30, 200, 50), "Lives: " + PlayerLives);
+	GUI.Label(Rect(10, 10, 200, 50), "Score: " + GameScript.Score);
+	GUI.Label(Rect(10, 30, 200, 50), "Lives: " + GameScript.Lives);
 }
 
 function OnTriggerEnter(otherObject : Collider) {
@@ -34,10 +32,10 @@ function OnTriggerEnter(otherObject : Collider) {
 				
 		var explosion : Transform;
 		explosion = Instantiate(PlayerExplosionPrefab, transform.position, transform.rotation);
-		yield WaitForSeconds(PlayerRespawnDelay);
 
-		PlayerLives--;
-		if (PlayerLives <= 0) {
+		GameScript.Lives--;
+		if (GameScript.Lives <= 0) {
+			yield WaitForSeconds(PlayerDeathDelay);
 			Application.LoadLevel(2);
 		} else {
 			EnemyScript.Respawn(otherObject.gameObject.transform);
