@@ -2,20 +2,15 @@
 
 var EnemySpeed : int;
 
-function Start () {
-
-}
-
 function Update () {
+	// Move the enemy straight down
 	var amtToMove = EnemySpeed * Time.deltaTime;
 	transform.Translate(Vector3.down * amtToMove);
+	
+	// If the enemy is at the bottom of the screen, deduct from the
+	// score for letting it get by. Then "respawn" the enemy.
 	if (transform.position.y <= -5.2) {
 		GameScript.Score -= 20;
-		Respawn(transform);
+		GameScript.Respawn(transform);
 	}
-}
-
-static function Respawn (trans : Transform) {
-	trans.position.y = 7;
-	trans.position.x = Random.Range(-6, 6);
 }
