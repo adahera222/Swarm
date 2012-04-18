@@ -22,7 +22,9 @@ function OnTriggerEnter(otherObject : Collider) {
 		GameScript.Score += 100;
 		
 		// "Respawn" the enemy
-		GameScript.Respawn(otherObject.gameObject.transform);
+		if (GameScript.Lives > 0) {
+			GameScript.Respawn(otherObject.gameObject.transform);
+		}
 		
 		// Create an explosion and destroy the bullet (after we get its position for the explosion)
 		var explosion : Transform;
